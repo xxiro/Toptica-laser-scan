@@ -40,6 +40,8 @@ if __name__ == '__main__':
         
     print("Scan finished. Have a nice day!")
     
+    # wav_pow_dict = dict(zip(wav_actual, pow_actual))
+    # dlpro.save_obj(wav_pow_dict,"scan_power_spectrum") 
     
     plt.rcParams.update({'font.size': 20})
 
