@@ -80,7 +80,7 @@ def SendCmd(address, command, cmd_type, motor, value):
    
     reply = ser.read(9)
     #print('reply:',reply)
-    print('reply:',"".join("\\x"+"%02x" % b for b in reply))
+    #print('reply:',"".join("\\x"+"%02x" % b for b in reply))
     addr,module,status,comnum=reply[0:4]
     if status!=100:
         raise ValueError("Communication failed, status Code: %d"%status)

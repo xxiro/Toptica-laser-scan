@@ -20,26 +20,28 @@ if __name__ == '__main__':
 
     wlm = WavelengthMeter(debug=args.debug) 
     
-    start_wav = 1300
-    stop_wav = 1320
+    start_wav = 1280
+    stop_wav = 1315
     
     dlpro = laser()   
     start_pos = dlpro.get_wav_pos(start_wav)
     stop_pos = dlpro.get_wav_pos(stop_wav)
     
-    pos_range = range(start_pos,stop_pos+1)    
-    wav_actual = np.zeros(len(pos_range))
-    pow_actual = np.zeros(len(pos_range))
-    
+    pos_range = range(start_pos,stop_pos+1,100)    
+    wav_actual = []
+    pow_actual = []
+    print("move to starting position")
+    dlpro.set_motor(start_pos)
+    time.sleep(5)
     print("Scan starting...")
     for i in range(len(pos_range)):
-        dlpro.set_motor(pos_range[i])
-        time.sleep(5)    
-        wav_actual[i] = round(wlm.wavelength,3)
-        pow_actual[i] = wlm.power
+        dlpro.set_motor(pos_range[i])  
+        wav_actual.append(round(wlm.wavelength,3))
+        pow_actual.append(wlm.power)
         
     print("Scan finished. Have a nice day!")
-    
+    print(wav_actual)
+    print(pow_actual)
     # wav_pow_dict = dict(zip(wav_actual, pow_actual))
     # dlpro.save_obj(wav_pow_dict,"scan_power_spectrum") 
     
@@ -51,3 +53,5 @@ if __name__ == '__main__':
     axs.set_xlabel('wavelength (nm)')
     
     axs.plot(wav_actual,pow_actual)
+    plt.show()
+    

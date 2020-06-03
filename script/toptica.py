@@ -63,12 +63,15 @@ class laser():
     def get_wav_pos(self, wavelength):
         data = self.dict
         try:
+            print(data[wavelength])
             pos = data[wavelength]
         except KeyError:
+            print(1)
             all_wav = np.array(list(data.keys()))
-            nearest_idx = np.abs(all_wav - wavelength).argmin()
-            nearest = all_wav[nearest_idx]
-            pos = data[nearest]
+            print(all_wav)
+            nearest = np.abs(all_wav - wavelength).argmin()
+            print(nearest)
+            pos = data[all_wav[nearest]]
         return pos
             
     def set_wavelength(self, wavelength):

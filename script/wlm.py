@@ -18,6 +18,7 @@ class WavelengthMeter:
         if not debug:
             self.dll = ctypes.WinDLL(dllpath)
             self.dll.GetWavelengthNum.restype = ctypes.c_double
+            self.dll.GetPowerNum.restype = ctypes.c_double
             self.dll.GetFrequencyNum.restype = ctypes.c_double
             self.dll.GetSwitcherMode.restype = ctypes.c_long
 
@@ -108,13 +109,3 @@ if __name__ == '__main__':
         print("Wavelength at channel %d:\t%.4f nm" % (i, wlm.wavelengths[i]))
 
     print(wlm.wavelengths[1:6:2])
-    # old_mode = wlm.switcher_mode
-
-    # wlm.switcher_mode = True
-
-    # print(wlm.wavelengths)
-    # time.sleep(0.1)
-    # print(wlm.wavelengths)
-
-    # wlm.switcher_mode = old_mode
-
